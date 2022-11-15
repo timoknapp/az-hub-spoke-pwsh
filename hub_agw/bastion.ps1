@@ -1,6 +1,6 @@
 # Import variables
-$CurrentDircectory = Get-Location
-. $CurrentDircectory\_variables.ps1
+$CurrentDirectory = Get-Location
+. $CurrentDirectory\_variables.ps1
 
 $publicip = New-AzPublicIpAddress -ResourceGroupName $RgHubName -name "pip-bh-$Env-$Location" -location $Location -AllocationMethod Static -Sku Standard
 

@@ -22,13 +22,13 @@ $virtualNetwork = New-AzVirtualNetwork @vnet
 
 #####---------Created by provided scriopt from Hybrid Cloud Team---------#####
 # Create VNET Gateway (express route gateway) subnet
-# $subnet_vnet_er_gateway = @{
-#     Name = "snet-vnet-er-gw-$Env-$Location-001"
-#     VirtualNetwork = $virtualNetwork
-#     AddressPrefix = $SubnetErGatewayPrefix
-# }
+$subnet_vnet_er_gateway = @{
+    Name = "GatewaySubnet"
+    VirtualNetwork = $virtualNetwork
+    AddressPrefix = $SubnetErGatewayPrefix
+}
 
-# Add-AzVirtualNetworkSubnetConfig @subnet_vnet_er_gateway
+Add-AzVirtualNetworkSubnetConfig @subnet_vnet_er_gateway
 
 
 # Create Firewall subnet

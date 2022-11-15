@@ -13,7 +13,7 @@ $publicip = New-AzPublicIpAddress -ResourceGroupName $RgHubName -name "pip-agw-$
   -location $Location -AllocationMethod Static -Sku Standard
 
 #Create pool and frontend port
-$gwSubnet = Get-AzVirtualNetworkSubnetConfig -Name "snet-agw-subnet-$Env-$Location-001" -VirtualNetwork $VnetAgw
+$gwSubnet = Get-AzVirtualNetworkSubnetConfig -Name "snet-agw-$Env-$Location-001" -VirtualNetwork $VnetAgw
 
 $gipconfig = New-AzApplicationGatewayIPConfiguration -Name "AppGwIpConfig" -Subnet $gwSubnet
 $fipconfig01 = New-AzApplicationGatewayFrontendIPConfig -Name "fipconfig" -PublicIPAddress $publicip

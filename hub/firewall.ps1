@@ -1,6 +1,6 @@
 # Import variables
-$CurrentDircectory = Get-Location
-. $CurrentDircectory\_variables.ps1
+$CurrentDirectory = Get-Location
+. $CurrentDirectory\_variables.ps1
 
 $VnetAgw = Get-AzVirtualNetwork -ResourceGroupName $RgHubName -Name $VnetHubName
 
