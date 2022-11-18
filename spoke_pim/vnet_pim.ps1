@@ -21,7 +21,7 @@ $virtualNetwork = New-AzVirtualNetwork @vnet
 
 # Create default subnet
 $subnet_default = @{
-    Name = "snet-default-$Env-$Location-001"
+    Name = $SubnetPimDefaultName
     VirtualNetwork = $virtualNetwork
     AddressPrefix = $SubnetPimDefaultPrefix
 }

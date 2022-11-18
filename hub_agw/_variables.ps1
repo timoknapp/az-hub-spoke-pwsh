@@ -10,5 +10,8 @@ $VnetAgwIpPrefix            = '172.16.224.0/23'
 $SubnetAgwIpPrefix          = '172.16.224.0/24'
 $SubnetBastionIpPrefix      = '172.16.225.0/26'
 
+$SubnetAgwName              = "snet-agw-$Env-$Location-001"
+$SubnetBastionName          = 'AzureBastionSubnet'
+
 #----------Config App Gateway----------
 $AppGwName                  = "appgw-$Env-$Location-001"

@@ -23,7 +23,7 @@ $virtualNetwork = New-AzVirtualNetwork @vnet
 #####---------Created by provided scriopt from Hybrid Cloud Team---------#####
 # Create VNET Gateway (express route gateway) subnet
 $subnet_vnet_er_gateway = @{
-    Name = "GatewaySubnet"
+    Name = $SubnetErGatewayName
     VirtualNetwork = $virtualNetwork
     AddressPrefix = $SubnetErGatewayPrefix
 }
@@ -33,7 +33,7 @@ Add-AzVirtualNetworkSubnetConfig @subnet_vnet_er_gateway
 
 # Create Firewall subnet
 $subnet_firewall = @{
-    Name = "AzureFirewallSubnet"
+    Name = $SubnetFirewallName
     VirtualNetwork = $virtualNetwork
     AddressPrefix = $SubnetFirewallPrefix
 }
@@ -43,7 +43,7 @@ Add-AzVirtualNetworkSubnetConfig @subnet_firewall
 
 # Create DNS Private Resolver subnet inbound endpoint
 $subnet_dnspr_inbound = @{
-    Name = "snet-dns-pr-inbound-$Env-$Location-001"
+    Name = $SubnetDnsPrInboundName
     VirtualNetwork = $virtualNetwork
     AddressPrefix = $SubnetDnsPrInboundPrefix
 }
@@ -53,7 +53,7 @@ Add-AzVirtualNetworkSubnetConfig @subnet_dnspr_inbound
 
 # Create DNS Private Resolver subnet outbound endpoint
 $subnet_dnspr_outbound = @{
-    Name = "snet-dns-pr-outbound-$Env-$Location-001"
+    Name = $SubnetDnsPrOutboundName
     VirtualNetwork = $virtualNetwork
     AddressPrefix = $SubnetDnsPrOutboundPrefix
 }
@@ -63,7 +63,7 @@ Add-AzVirtualNetworkSubnetConfig @subnet_dnspr_outbound
 
 # Create private link (privaten endpoint) subnet outbound endpoint
 $subnet_private_link = @{
-    Name = "snet-private-link-$Env-$Location-001"
+    Name = $SubnetPrivateLinkName
     VirtualNetwork = $virtualNetwork
     AddressPrefix = $SubnetPrivateLinkPrefix
 }

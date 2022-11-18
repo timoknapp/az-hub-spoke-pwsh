@@ -21,7 +21,7 @@ $virtualNetwork = New-AzVirtualNetwork @vnet
 
 # Create AGW subnet
 $subnet_agw = @{
-    Name = "snet-agw-$Env-$Location-001"
+    Name = $SubnetAgwName
     VirtualNetwork = $virtualNetwork
     AddressPrefix = $SubnetAgwIpPrefix
 }
@@ -30,7 +30,7 @@ Add-AzVirtualNetworkSubnetConfig @subnet_agw
 
 # Create Bastion Host subnet
 $subnet_bst = @{
-    Name = "AzureBastionSubnet"
+    Name = $SubnetBastionName
     VirtualNetwork = $virtualNetwork
     AddressPrefix = $SubnetBastionIpPrefix
 }

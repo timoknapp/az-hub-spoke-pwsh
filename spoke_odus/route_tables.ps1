@@ -19,7 +19,7 @@ $RouteTable = Get-AzRouteTable -ResourceGroupName $RgOdusName -Name "rt-vm"
 
 Set-AzVirtualNetworkSubnetConfig `
   -VirtualNetwork $VnetOdus `
-  -Name "snet-default-$Env-$Location-001" `
+  -Name $SubnetOdusDefaultName `
   -AddressPrefix $SubnetOdusDefaultPrefix `
   -RouteTable $RouteTable | `
 Set-AzVirtualNetwork

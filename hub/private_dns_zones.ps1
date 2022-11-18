@@ -10,12 +10,13 @@ $VirtualNetwork = Get-AzVirtualNetwork -ResourceGroupName $RgHubName -Name $Vnet
 
 #-------------------Create DNS Private Zones-------------------
 foreach ($DnsZone in $DnsZones) {
-
     New-AzPrivateDnsZone -Name $DnsZone -ResourceGroupName $RgHubName
 
-    New-AzPrivateDnsVirtualNetworkLink -ZoneName $DnsZone `
-        -ResourceGroupName $RgHubName -Name "$DnsZone-link" `
-        -VirtualNetworkId $VirtualNetwork.Id -EnableRegistration
-
+    New-AzPrivateDnsVirtualNetworkLink `
+        -ZoneName $DnsZone `
+        -ResourceGroupName $RgHubName `
+        -Name "$DnsZone-link-hub-$Env-$Location-001" `
+        -VirtualNetworkId $VirtualNetwork.Id `
+        -EnableRegistration
 }
 
