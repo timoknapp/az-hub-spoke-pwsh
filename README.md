@@ -1,4 +1,4 @@
-# Hub and Spoke Architecture on Azure
+# Infrastructure as Code
 
 ## Architecture
 
@@ -9,7 +9,20 @@ The following diagram shows a simplified version of a Hub & Spoke architecture o
 ## Getting started
 
 - Install PowerShell Module. Run the following command within your PowerShell: 
-  > `Install-Module -Name Az`
+  
+  ```powershell
+  Install-Module -Name Az
+  ```
+
+- Set some environment variabels before running the scripts:
+  
+  ```powershell
+  $AZURE_SUBSCRIPTION_ID_HUB = 'HUB_SUBSCRIPTION_ID'
+  $AZURE_SUBSCRIPTION_ID_SPOKE = 'SPOKE_SUBSCRIPTION_ID'
+  $DNS_SERVER_ON_PREM_IP='INSERT_IP_HERE'
+  $HOSTNAMES_ON_PREM=@('HOSTNAME_ON_PREM_1.','HOSTNAME_ON_PREM_2.') # don't forget about the trailing dots at the end!
+  ```
+
 - **Setup basic Hub infrastructure:**
   - There are 5 different packages which can be executed independently:
     1. Setup the central Hub: [`./hub/main.ps1`](hub/main.ps1)

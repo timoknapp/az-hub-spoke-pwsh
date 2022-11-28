@@ -1,3 +1,8 @@
+. ".\..\utils\setContext.ps1"
+
+# Set context
+setHubContext
+
 # Import variables
 $CurrentDirectory = Get-Location
 . $CurrentDirectory\_variables.ps1
@@ -62,11 +67,31 @@ New-AzDnsForwardingRulesetVirtualNetworkLink `
 
 # Keep in mind that the spoke VNETs will be linked within the spoke configuration
 
-# Sample
-# $targetDNS1 = New-AzDnsResolverTargetDnsServerObject -IPAddress 192.168.1.2 -Port 53 
-# $targetDNS2 = New-AzDnsResolverTargetDnsServerObject -IPAddress 192.168.1.3 -Port 53
-# $targetDNS3 = New-AzDnsResolverTargetDnsServerObject -IPAddress 10.0.0.4 -Port 53
-# $targetDNS4 = New-AzDnsResolverTargetDnsServerObject -IPAddress 10.5.5.5 -Port 53
-# $forwardingrule = New-AzDnsForwardingRulesetForwardingRule -ResourceGroupName myresourcegroup -DnsForwardingRulesetName myruleset -Name "Internal" -DomainName "internal.contoso.com." -ForwardingRuleState "Enabled" -TargetDnsServer @($targetDNS1,$targetDNS2)
-# $forwardingrule = New-AzDnsForwardingRulesetForwardingRule -ResourceGroupName myresourcegroup -DnsForwardingRulesetName myruleset -Name "AzurePrivate" -DomainName "azure.contoso.com" -ForwardingRuleState "Enabled" -TargetDnsServer $targetDNS3
-# $forwardingrule = New-AzDnsForwardingRulesetForwardingRule -ResourceGroupName myresourcegroup -DnsForwardingRulesetName myruleset -Name "Wildcard" -DomainName "." -ForwardingRuleState "Enabled" -TargetDnsServer $targetDNS4
+# Setting up the forwarding ruleset for the DNS Private Resolver for On-Premises and Azure
+$targetDnsOnPrem = New-AzDnsResolverTargetDnsServerObject -IPAddress $DnsServerOnPremIp -Port 53 
+$targetDnsResolverInbound = New-AzDnsResolverTargetDnsServerObject -IPAddress $InboundEndpoint.IPConfiguration.PrivateIPAddress -Port 53
+
+# Create a forwarding rule for each On-Premises Hostname
+foreach ($Hostname in $HostnamesOnPrem) {
+    $HostnameWithoutSpecialChars = $Hostname.Replace('.','')
+    write-host "Creating forwarding rule for $Hostname"
+    New-AzDnsForwardingRulesetForwardingRule `
+        -ResourceGroupName $RgHubName `
+        -DnsForwardingRulesetName $DnsPrForwardingRulesetName `
+        -Name "OnPrem-$HostnameWithoutSpecialChars" `
+        -DomainName $Hostname `
+        -ForwardingRuleState "Enabled" `
+        -TargetDnsServer $targetDnsOnPrem
+}
+
+# Create a forwarding rule for each Azure Private DNS Zone
+foreach ($PrivateDnsZone in $AzPrivateDnsZones) {
+    write-host "Creating forwarding rule for $PrivateDnsZone"
+    New-AzDnsForwardingRulesetForwardingRule `
+        -ResourceGroupName $RgHubName `
+        -DnsForwardingRulesetName $DnsPrForwardingRulesetName `
+        -Name "AzurePrivate" `
+        -DomainName "$PrivateDnsZone." `
+        -ForwardingRuleState "Enabled" `
+        -TargetDnsServer $targetDnsResolverInbound
+}

@@ -1,5 +1,8 @@
-# Execution example
-# .\rg_hub_dev.ps1 -location westeurope
+. ".\..\utils\setContext.ps1"
+
+# Set context
+setSpokeContext
+
 
 # Import variables
 $CurrentDirectory = Get-Location

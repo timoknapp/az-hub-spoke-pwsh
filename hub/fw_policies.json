@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "type": "string",
+        "defaultValue": "westeurope"
+      },
+      "env": {
+        "type": "string",
+        "defaultValue": "dev"
+      },
+      "name": {
+        "type": "string",
+        "defaultValue": "[format('fw-policy-{0}', parameters('env'))]"
+      }
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Network/firewallPolicies",
+        "apiVersion": "2022-01-01",
+        "name": "[parameters('name')]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "snat": {
+            "privateRanges": [
+              "255.255.255.255/32"
+            ]
+          }
+        }
+      }
+    ]
+  }

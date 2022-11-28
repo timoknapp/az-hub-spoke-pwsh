@@ -1,11 +1,11 @@
+. ".\..\utils\setContext.ps1"
+
+# Set context
+setHubContext
+
 # Import variables
 $CurrentDirectory = Get-Location
 . $CurrentDirectory\_variables.ps1
-
-# Printing details on the currently selected Subscription
-Write-Output "Subscription ID: $((Get-AzContext).Subscription.Id)"
-Write-Output "Subscription Name: $((Get-AzContext).Subscription.Name)"
-
 
 # ---------------Create virtual network--------
 $vnet = @{

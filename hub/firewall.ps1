@@ -1,3 +1,8 @@
+. ".\..\utils\setContext.ps1"
+
+# Set context
+setHubContext
+
 # Import variables
 $CurrentDirectory = Get-Location
 . $CurrentDirectory\_variables.ps1
