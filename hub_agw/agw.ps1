@@ -15,7 +15,7 @@ $VnetAgw = Get-AzVirtualNetwork -ResourceGroupName $RgHubName -Name $VnetAgwName
 
 #Create a Static Public VIP
 $publicip = New-AzPublicIpAddress -ResourceGroupName $RgHubName -name "pip-agw-$Env-$Location" `
-  -location $Location -AllocationMethod Static -Sku Standard
+  -location $Location -AllocationMethod Static -Sku Standard -DomainNameLabel "agw-oneplatform-$Env"
 
 #Create pool and frontend port
 $gwSubnet = Get-AzVirtualNetworkSubnetConfig -Name "snet-agw-$Env-$Location-001" -VirtualNetwork $VnetAgw
