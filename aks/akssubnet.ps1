@@ -34,9 +34,10 @@ function CreateAKSSubnet {
 
         }
         Write-Host " ############### End Create Subnet ####################" 
-       $PimSubNetAKS = Get-AzVirtualNetworkSubnetConfig -Name $AKSSubnetName -VirtualNetwork $AKSVirtualNetwork  -ErrorAction SilentlyContinue
+        Clear-Variable -name "PimSubNetAKS"
+       $newsubs = Get-AzVirtualNetworkSubnetConfig -Name $AKSSubnetName -VirtualNetwork $AKSVirtualNetwork  
 
-        return $PimSubNetAKS
+        return $newsubs
         ## TODO 
     }
 

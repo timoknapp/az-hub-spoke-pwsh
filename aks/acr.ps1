@@ -26,7 +26,7 @@ function CreateContainerRegistry {
            $ExistingACR = New-AzContainerRegistry -ResourceGroupName $ACRRG -Name $ACRName -EnableAdminUser -Sku Basic -Location $Location 
         } 
         # set 
-        Write-Host -InputObject $ExistingACR
+        Write-Host $ExistingACR.ToString()
         return $ExistingACR
 
 

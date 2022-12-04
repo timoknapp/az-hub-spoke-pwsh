@@ -21,7 +21,7 @@ $CurrentDirectory = Get-Location
 #. "$PSScriptroot\aks.ps1"
 # Create KeyVault 
 #$uuid = (Get-Random -Maximum 99999)
-$uuid = "ivantest10"
+$uuid = "ivantest14"
 $ProjectSufix                       ="pim-$uuid"
 $RgAKSName                          ="$ProjectSufix-$Env-$Location"
 #$UserManagedIdentityName="$ProjectSufix-identity"
@@ -84,6 +84,7 @@ $workspaceid = $loganalytics.ResourceId
 Write-Host "Adding AKS to subnet =  $Subnetid"
 Write-Host "Attaching Registry =  $RegistryId"
 Write-Host "Attching =  $workspaceid"
-
-CreateAKS $ProjectSufix $RgAKSName $KeyVaultName $RegistryId $Subnetid $workspaceid
+### Weirdly, i have to construct this as a string. for some reason the 
+$subnet = "/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Network/virtualNetworks/{2}/subnets/{3}" -f  $AZURE_SUBSCRIPTION_ID_HUB, $RgPimName, $VnetName, $AKSSubnetName 
+CreateAKS $ProjectSufix $RgAKSName $KeyVaultName $RegistryId $subnet $workspaceid
 
