@@ -26,6 +26,7 @@ $NodePoolLabel = $labels
 $ServiceCidr="10.2.0.0/24"
 $DnsServiceIP ="10.2.0.10" 
 $AvailabilityZone="3"
+$AKSAdminUser="<Add your user id here>"
 
 ###### PIM Networking 
 

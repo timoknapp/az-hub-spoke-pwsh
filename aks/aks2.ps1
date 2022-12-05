@@ -138,7 +138,8 @@ function CreateAKS {
             --enable-managed-identity `
             --assign-identity $AKSUserManagedIdentity.Id  `
             --auto-upgrade-channel stable `
-            --assign-kubelet-identity $AKSKubeletUserManagedIdentity.Id
+            --assign-kubelet-identity $AKSKubeletUserManagedIdentity.Id `
+            --enable-aad --aad-admin-group-object-ids $AKSAdminUser
 
     }
 
