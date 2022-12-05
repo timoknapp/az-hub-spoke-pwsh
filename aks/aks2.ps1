@@ -67,9 +67,9 @@ function CreateAKS {
       
         ##### leeping a bit as the Graph is not immediately available 
         Write-Host "         Sleeping a bit, 60 seconds as the Graph is not immediately available " 
-        for ($i = 1; $i -le 100; $i++ ) {
-            Write-Progress -Activity "Search in Progress" -Status "$i% Complete:" -PercentComplete $i
-            Start-Sleep -Seconds 1s
+        for ($i = 1; $i -le 60; $i++ ) {
+            Write-Progress -Activity "Simply waiting" -Status "$i% Complete:" -PercentComplete $i
+            Start-Sleep -Seconds 1
         }
        
 

@@ -30,7 +30,7 @@ function CreateAKSSubnet {
             Write-Host "Subnet not found, gona create"
 
             $PimSubNetAKS = Add-AzVirtualNetworkSubnetConfig -Name $AKSSubnetName -VirtualNetwork $AKSVirtualNetwork -AddressPrefix $subnetRange 
-            $AKSVirtualNetwork |  Set-AzVirtualNetwork
+            $AKSVirtualNetwork | Set-AzVirtualNetwork
 
         }
         Write-Host " ############### End Create Subnet ####################" 

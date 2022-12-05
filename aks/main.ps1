@@ -22,7 +22,7 @@ $CurrentDirectory = Get-Location
 # Create KeyVault 
 #$uuid = (Get-Random -Maximum 99999)
 $uuid = "ivantest14"
-$ProjectSufix                       ="pim-$uuid"
+$ProjectSufix                       ="odus-$uuid"
 $RgAKSName                          ="$ProjectSufix-$Env-$Location"
 #$UserManagedIdentityName="$ProjectSufix-identity"
 #$KubeletUserManagedIdentityName="$ProjectSufix-kubelet"

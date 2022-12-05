@@ -23,7 +23,6 @@ $NodePoolMode="System"
 $NodeName = "basepool"
 $NodeOsDiskSize = "100"
 $NodePoolLabel = $labels
-$DockerBridgeCidr = "172.17.0.1/16"
 $ServiceCidr="10.2.0.0/24"
 $DnsServiceIP ="10.2.0.10" 
 $AvailabilityZone="3"
