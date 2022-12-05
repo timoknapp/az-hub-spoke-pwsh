@@ -1,7 +1,7 @@
 . ".\..\utils\setContext.ps1"
 
 # Set context
-setHubContext
+setSpokeContext
 # Import variables
 $CurrentDirectory = Get-Location
 . $CurrentDirectory\_variables.ps1
@@ -43,6 +43,7 @@ $VnetName                    = "vnet-odus-$Env-$Location-001"
 $RgPimName                      = "rg-odus-$Env-$Location-001"
 # subnet name for aks
 $AKSSubnetName = "aks"
+
 Write-Host "####################### Variables #####################################" -ForegroundColor Cyan
 Write-Host " AKSCluster name =          $ProjectSufix"
 Write-Host " Resource Group  =          $RgAKSName" 
@@ -70,7 +71,7 @@ $Registry = CreateContainerRegistry $ACRName $RgAKSName
 $subnet = CreateAKSSubnet $VnetName $AKSSubnetName $RgPimName $SubnetPimAKSPrefix
 $myid = $kv.ResourceId
 Write-Host " ****** $myid ******" 
-CreatePrivateLinkInHuB  $RgHubName $VnetHubName  $SubnetPrivateLinkName $myid $ProjectSufix  "KeyVault"
+# CreatePrivateLinkInHuB  $RgHubName $VnetHubName  $SubnetPrivateLinkName $myid $ProjectSufix  "KeyVault"
 #Write-Output -InputObject $Registry
 #rite-Output -InputObject $subnet
 Write-Output -InputObject $subnet
@@ -85,6 +86,12 @@ Write-Host "Adding AKS to subnet =  $Subnetid"
 Write-Host "Attaching Registry =  $RegistryId"
 Write-Host "Attching =  $workspaceid"
 ### Weirdly, i have to construct this as a string. for some reason the 
-$subnet = "/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Network/virtualNetworks/{2}/subnets/{3}" -f  $AZURE_SUBSCRIPTION_ID_HUB, $RgPimName, $VnetName, $AKSSubnetName 
+$subnet = "/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Network/virtualNetworks/{2}/subnets/{3}" -f  $AZURE_SUBSCRIPTION_ID_SPOKE, $RgPimName, $VnetName, $AKSSubnetName 
 CreateAKS $ProjectSufix $RgAKSName $KeyVaultName $RegistryId $subnet $workspaceid
+
+## Setup 
+## Private Link 
+#setHubContext
+#CreatePrivateLinkInHuB  $RgHubName $VnetHubName  $SubnetPrivateLinkName $myid $ProjectSufix  "KeyVault"
+
 
