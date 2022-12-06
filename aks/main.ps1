@@ -21,9 +21,9 @@ $CurrentDirectory = Get-Location
 #. "$PSScriptroot\aks.ps1"
 # Create KeyVault 
 #$uuid = (Get-Random -Maximum 99999)
-$uuid = "ivantest14"
+$uuid = "ivantest15"
 $ProjectSufix                       ="odus-$uuid"
-$RgAKSName                          ="$ProjectSufix-$Env-$Location"
+$RgAKSName                          ="rg-$ProjectSufix-$Env-$Location-001"
 #$UserManagedIdentityName="$ProjectSufix-identity"
 #$KubeletUserManagedIdentityName="$ProjectSufix-kubelet"
 
@@ -42,8 +42,7 @@ $VnetName                    = "vnet-odus-$Env-$Location-001"
 # RG where target vnet is 
 $RgPimName                      = "rg-odus-$Env-$Location-001"
 # subnet name for aks
-$AKSSubnetName = "aks"
-
+$AKSSubnetName = "snet-aks-$Env-$Location-001"
 Write-Host "####################### Variables #####################################" -ForegroundColor Cyan
 Write-Host " AKSCluster name =          $ProjectSufix"
 Write-Host " Resource Group  =          $RgAKSName" 

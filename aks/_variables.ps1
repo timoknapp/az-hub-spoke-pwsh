@@ -27,6 +27,7 @@ $ServiceCidr="10.2.0.0/24"
 $DnsServiceIP ="10.2.0.10" 
 $AvailabilityZone="3"
 $AKSAdminUser="<Add your user id here>"
+$dockerBridge="192.168.0.0/16"
 
 ###### PIM Networking 
 

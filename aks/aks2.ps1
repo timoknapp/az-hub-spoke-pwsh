@@ -125,6 +125,7 @@ function CreateAKS {
             --enable-addons  $AddOnNameToBeEnabled `
             --vm-set-type "VirtualMachineScaleSets"   `
             --tags $tags `
+            --docker-bridge-address  $dockerBridge `
             --nodepool-name="basepool" `
             --enable-cluster-autoscaler `
             --min-count $NodeMinCount `
@@ -132,15 +133,32 @@ function CreateAKS {
             --subscription $AZURE_SUBSCRIPTION_ID_SPOKE `
             --workspace-resource-id $WorkspaceID `
             --generate-ssh-keys `
+            --vnet-subnet-id  $SubNetID `
             --zones $AvailabilityZone `
             --node-resource-group $AksRG-managed `
             --attach-acr $ACRResourceID  `
             --enable-managed-identity `
             --assign-identity $AKSUserManagedIdentity.Id  `
             --auto-upgrade-channel stable `
-            --assign-kubelet-identity $AKSKubeletUserManagedIdentity.Id `
-            --enable-aad --aad-admin-group-object-ids $AKSAdminUser
+            --assign-kubelet-identity $AKSKubeletUserManagedIdentity.Id 
+##            --enable-aad --aad-admin-group-object-ids $AKSAdminUser
+        #### Getting secret identity
+        #  $secretProviderIdentity = $(az aks show -g $AksRG -n $AksName --query addonProfiles.azureKeyvaultSecretsProvider.identity.clientId -o tsv)
 
+        
+        ############# Create Keyvault Permission ################
+        #Write-Host '############# Create Keyvault Permission ################'  -ForegroundColor Cyan  
+        $parms3 = @{
+            VaultName                 = $KeyVault.VaultName
+            ResourceGroupName         = $KeyVault.ResourceGroupName
+            ObjectId                  = $secretProviderIdentity
+            PermissionsToSecrets      = "Get"
+            PermissionsToKeys         = "Get"
+            PermissionsToCertificates = "Get"    
+     
+        }  
+       # $resp = Set-AzKeyVaultAccessPolicy @parms3
+       # Write-Host $resp
     }
 
   
