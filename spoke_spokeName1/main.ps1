@@ -1,0 +1,5 @@
+. "$PSScriptroot\rg_spokeName1.ps1"
+. "$PSScriptroot\vnet_spokeName1.ps1"
+. "$PSScriptroot\vm_spokeName1.ps1"
+. "$PSScriptroot\route_tables.ps1"
+. "$PSScriptroot\dns_setup.ps1"
